@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>昕映</title>
+    <meta name="description" content="贴上视频链接，选一条线路，马上打开。">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<canvas id="star-canvas" aria-hidden="true"></canvas>
+
+<div class="page-shell">
+    <header class="topbar">
+        <a class="brand" href="/" aria-label="昕映首页">
+            <span class="brand__mark">X</span>
+            <span class="brand__text">
+                <strong>昕映</strong>
+                <small>一键刷新</small>
+            </span>
+        </a>
+
+        <div class="topbar__meta">
+            <span>复制就能用</span>
+            <span>双线路可选</span>
+            <span>手机也顺手</span>
+        </div>
+    </header>
+
+    <main class="hero-layout">
+        <section class="hero-copy">
+            <p class="eyebrow">Video Link Helper</p>
+            <h1>贴上链接，选好线路，直接打开。</h1>
+            <p class="hero-copy__desc">
+                常见视频链接都能试一试。少点几步，少绕几个页面。
+            </p>
+
+            <div class="hero-metrics" aria-label="页面亮点">
+                <article class="metric-card">
+                    <strong>2 条</strong>
+                    <span>线路可切换</span>
+                </article>
+                <article class="metric-card">
+                    <strong>1 次</strong>
+                    <span>点一下就走</span>
+                </article>
+                <article class="metric-card">
+                    <strong>更省事</strong>
+                    <span>打开更直接</span>
+                </article>
+            </div>
+
+            <section class="trust-panel" aria-labelledby="trust-title">
+                <div class="trust-panel__header">
+                    <h2 id="trust-title">简单好用</h2>
+                    <p>页面只保留最常用的几个动作，上手更快。</p>
+                </div>
+                <div class="trust-grid">
+                    <article>
+                        <strong>看着舒服</strong>
+                        <p>星空背景更安静，重点都留给输入和选择。</p>
+                    </article>
+                    <article>
+                        <strong>提示更直白</strong>
+                        <p>哪里没填、哪条已选，一眼就能看明白。</p>
+                    </article>
+                    <article>
+                        <strong>手机更方便</strong>
+                        <p>按钮和卡片都更大，点起来更轻松。</p>
+                    </article>
+                </div>
+            </section>
+        </section>
+
+        <section class="console-panel" aria-labelledby="parser-title">
+            <div class="console-panel__chrome" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="console-panel__header">
+                <p class="eyebrow eyebrow--soft">Quick Open</p>
+                <h2 id="parser-title">开始使用</h2>
+                <p>输入链接，选一条线路，然后直接打开。</p>
+            </div>
+
+            <form id="parser-form" class="parser-form" action="/m" method="post">
+                <label class="field" for="url">
+                    <span class="field__label">视频链接</span>
+                    <div class="input-shell">
+                        <input id="url" name="url" type="url" placeholder="https://www.iqiyi.com/v_..." autocomplete="off" required>
+                        <button id="fill-demo" class="input-shell__ghost" type="button">示例</button>
+                    </div>
+                    <span class="field__hint">请输入完整链接。</span>
+                </label>
+
+                <div class="field">
+                    <div class="field__split">
+                        <span class="field__label">线路</span>
+                        <span id="channel-count" class="field__meta">加载中...</span>
+                    </div>
+                    <div id="channel-list" class="channel-list" role="radiogroup" aria-label="线路列表"></div>
+                </div>
+
+                <div class="quick-tips" aria-label="示例链接">
+                    <button class="quick-tips__item" type="button" data-url="https://www.iqiyi.com/v_19rr1skq2c.html">爱奇艺</button>
+                    <button class="quick-tips__item" type="button" data-url="https://v.qq.com/x/cover/mzc00200x1g5l3l.html">腾讯视频</button>
+                    <button class="quick-tips__item" type="button" data-url="https://www.bilibili.com/video/BV1xx411c7mD/">哔哩哔哩</button>
+                </div>
+
+                <div class="actions">
+                    <button id="submit-button" type="submit" class="btn btn--primary">立即打开</button>
+                </div>
+            </form>
+
+            <p id="form-message" class="form-message" aria-live="polite"></p>
+
+            <section class="flow-card" aria-labelledby="flow-title">
+                <div class="flow-card__header">
+                    <h3 id="flow-title">怎么用</h3>
+                    <span class="flow-card__tag">3 步就够</span>
+                </div>
+                <ol class="flow-list">
+                    <li>把视频链接贴进来。</li>
+                    <li>选一条可用线路。</li>
+                    <li>点按钮直接打开。</li>
+                </ol>
+            </section>
+        </section>
+    </main>
+</div>
+
+<script src="/js/universe.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

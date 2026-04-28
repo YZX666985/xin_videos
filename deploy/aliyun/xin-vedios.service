@@ -1,0 +1,17 @@
+[Unit]
+Description=xin-vedios Spring Boot application
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/xin-vedios
+ExecStart=/usr/bin/java -jar /opt/xin-vedios/app.jar --spring.profiles.active=prod
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/xin-vedios/app.log
+StandardError=append:/var/log/xin-vedios/app-error.log
+
+[Install]
+WantedBy=multi-user.target
