@@ -9,10 +9,6 @@ app:
   parser:
     channels:
       - id: "1"
-        name: "\u0056\u0049\u0050\u89e3\u6790\u63a5\u53e31"
+        name: "\u89e3\u6790\u53e3"
         description: "\u4f7f\u7528 xmflv \u89e3\u6790\u901a\u9053\uff0c\u9002\u5408\u5feb\u901f\u76f4\u8fbe\u3002"
         target: "https://jx.xmflv.com/?url=%s"
-      - id: "2"
-        name: "\u0056\u0049\u0050\u89e3\u6790\u63a5\u53e32"
-        description: "\u4f7f\u7528 yemu \u89e3\u6790\u901a\u9053\uff0c\u9002\u5408\u4f5c\u4e3a\u5907\u7528\u7ebf\u8def\u3002"
-        target: "https://www.yemu.xyz/?url=%s"

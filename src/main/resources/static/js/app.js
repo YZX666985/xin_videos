@@ -4,21 +4,16 @@ const form = document.getElementById("parser-form");
 const messageEl = document.getElementById("form-message");
 const urlInput = document.getElementById("url");
 const submitButton = document.getElementById("submit-button");
-const fillDemoButton = document.getElementById("fill-demo");
-const quickTipButtons = Array.from(document.querySelectorAll(".quick-tips__item"));
 
 const MESSAGES = {
-    channelLoadFailed: "线路加载失败",
-    channelLoadRetry: "线路暂时不可用，请刷新后再试。",
-    redirecting: "马上为你打开...",
-    missingUrl: "请先输入链接。",
-    invalidScheme: "请输入完整链接。",
-    missingChannel: "请先选一条线路。",
-    filledDemo: "已填入示例链接。",
-    channelSelected: "线路已切换。"
+    channelLoadFailed: "\u7ebf\u8def\u52a0\u8f7d\u5931\u8d25",
+    channelLoadRetry: "\u7ebf\u8def\u6682\u65f6\u4e0d\u53ef\u7528\uff0c\u8bf7\u5237\u65b0\u540e\u518d\u8bd5\u3002",
+    redirecting: "\u9a6c\u4e0a\u4e3a\u4f60\u6253\u5f00...",
+    missingUrl: "\u8bf7\u5148\u8f93\u5165\u94fe\u63a5\u3002",
+    invalidScheme: "\u8bf7\u8f93\u5165\u5b8c\u6574\u94fe\u63a5\u3002",
+    missingChannel: "\u8bf7\u5148\u9009\u4e00\u6761\u7ebf\u8def\u3002",
+    channelSelected: "\u7ebf\u8def\u5df2\u5207\u6362\u3002"
 };
-
-const DEFAULT_DEMO_URL = "https://www.iqiyi.com/v_19rr1skq2c.html";
 
 document.addEventListener("DOMContentLoaded", async () => {
     if (typeof createUniverseStarfield === "function") {
@@ -37,10 +32,10 @@ async function loadChannels() {
         }
 
         const channels = await response.json();
-        channelCountEl.textContent = `${channels.length} 条可用`;
+        channelCountEl.textContent = `${channels.length} \u6761\u53ef\u7528`;
         renderChannels(channels);
     } catch (error) {
-        channelCountEl.textContent = "加载失败";
+        channelCountEl.textContent = "\u52a0\u8f7d\u5931\u8d25";
         setMessage(error.message || MESSAGES.channelLoadRetry, "error");
     }
 }
@@ -50,7 +45,7 @@ function renderChannels(channels) {
         const safeId = escapeHtml(channel.id);
         const safeName = escapeHtml(channel.name);
         const safeDescription = escapeHtml(channel.description || "");
-        const badge = index === 0 ? "推荐" : "备用";
+        const badge = index === 0 ? "\u63a8\u8350" : "\u5907\u7528";
 
         return `
             <div class="channel-option ${index === 0 ? "is-recommended" : ""}">
@@ -73,14 +68,6 @@ function renderChannels(channels) {
 function bindEvents() {
     form.addEventListener("submit", handleFormSubmit);
     channelList.addEventListener("change", handleChannelChange);
-    fillDemoButton.addEventListener("click", () => applyDemoUrl(DEFAULT_DEMO_URL));
-
-    quickTipButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const demoUrl = button.dataset.url || DEFAULT_DEMO_URL;
-            applyDemoUrl(demoUrl);
-        });
-    });
 }
 
 function handleFormSubmit(event) {
@@ -91,7 +78,7 @@ function handleFormSubmit(event) {
     }
 
     submitButton.disabled = true;
-    submitButton.textContent = "打开中...";
+    submitButton.textContent = "\u6253\u5f00\u4e2d...";
     setMessage(MESSAGES.redirecting, "success");
 }
 
@@ -99,13 +86,6 @@ function handleChannelChange(event) {
     if (event.target && event.target.name === "jk") {
         setMessage(MESSAGES.channelSelected, "success");
     }
-}
-
-function applyDemoUrl(url) {
-    urlInput.value = url;
-    urlInput.focus();
-    urlInput.setSelectionRange(url.length, url.length);
-    setMessage(MESSAGES.filledDemo, "success");
 }
 
 function collectFormData() {
@@ -142,7 +122,7 @@ function setMessage(message, type) {
     } else if (type === "error") {
         messageEl.classList.add("is-error");
         submitButton.disabled = false;
-        submitButton.textContent = "立即打开";
+        submitButton.textContent = "\u7acb\u5373\u6253\u5f00";
     }
 }
 
